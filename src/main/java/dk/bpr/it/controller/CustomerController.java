@@ -30,7 +30,8 @@ public class CustomerController {
     public ResponseEntity createCustomer(@RequestBody Customer customer) {
         return ResponseEntity
                 .created(URI.create(
-                        linkTo(methodOn(CustomerController.class).getCustomer(0))
+                        linkTo(methodOn(CustomerController.class)
+                                .getCustomer(customer.getIdentifier()))
                                 .withSelfRel().getHref()))
                 .build();
     }
@@ -39,4 +40,6 @@ public class CustomerController {
     public ResponseEntity<Customer> getCustomer(@PathVariable("id") int id) {
         return ResponseEntity.ok(Customer.builder().identifier(id).build());
     }
+
+
 }
